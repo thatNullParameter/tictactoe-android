@@ -1,0 +1,16 @@
+README
+======
+This is a simple tic tac toe for android.
+
+
+features
+========
+- 2 players
+- winner detection
+- turn detection
+
+
+next features
+===============
+- stop game when someone wins
+- put a reset menu
