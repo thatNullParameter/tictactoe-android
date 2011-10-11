@@ -14,7 +14,8 @@ import com.tictactoe.utils.Util;
 public class TicTacToeActivity extends Activity {
 	/** Called when the activity is first created. */
 
-	TicTacToeModel game = new TicTacToeModel();
+	private TicTacToeModel game = new TicTacToeModel();
+	private int winner = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,13 @@ public class TicTacToeActivity extends Activity {
 
 	public void onButtonClick(View v) {
 
+		// someone wined already
+		if (winner>=0) {
+			printText("game ended");
+			return;
+		}
+		
+		
 		switch (v.getId()) {
 
 		case R.id.button1:
@@ -104,15 +112,19 @@ public class TicTacToeActivity extends Activity {
 			((Button) v).setText(playerText);
 
 			if (game.play(c)) {
-				Toast.makeText(this, "Player " + Util.CURRENT_PLAYER + " wins",
-						Toast.LENGTH_SHORT).show();
+				printText("Player " + Util.CURRENT_PLAYER + " wins");
+				winner = Util.CURRENT_PLAYER;
 			} else {
 
 				game.togglePlayer();
 			}
 
 		} else {
-			Toast.makeText(this, "Invalid move", Toast.LENGTH_SHORT).show();
+			printText("Invalid move");
 		}
+	}
+	
+	public void printText(String t) {
+		Toast.makeText(this, t, Toast.LENGTH_SHORT).show();
 	}
 }
